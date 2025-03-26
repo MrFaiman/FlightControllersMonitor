@@ -1,0 +1,93 @@
+import React, { useRef, useEffect } from "react";
+import { CompassProps, ArrowOptions } from "./types";
+
+const drawArrow = (
+	ctx: CanvasRenderingContext2D,
+	centerX: number,
+	centerY: number,
+	radius: number,
+	color: string,
+	options: ArrowOptions = {}
+) => {
+	const { rotation = 0, arrowLength = radius - 10, arrowHeadSize = 5, lineWidth = 2 } = options;
+
+	ctx.save();
+	ctx.translate(centerX, centerY);
+	ctx.rotate(rotation);
+
+	// Draw arrow line
+	ctx.beginPath();
+	ctx.moveTo(0, -arrowLength);
+	ctx.lineTo(0, 0);
+	ctx.strokeStyle = color;
+	ctx.lineWidth = lineWidth;
+	ctx.stroke();
+
+	// Draw arrow head
+	ctx.beginPath();
+	ctx.moveTo(0, -arrowLength);
+	ctx.lineTo(-arrowHeadSize, -arrowLength + arrowHeadSize);
+	ctx.lineTo(arrowHeadSize, -arrowLength + arrowHeadSize);
+	ctx.closePath();
+	ctx.fillStyle = color;
+	ctx.fill();
+
+	ctx.restore();
+};
+
+const Compass: React.FC<CompassProps> = ({ value, width = 300, height = 300, padding = 0 }) => {
+	const canvasRef = useRef<HTMLCanvasElement>(null);
+
+	useEffect(() => {
+		const canvas = canvasRef.current;
+		if (!canvas) return;
+
+		const ctx = canvas.getContext("2d");
+		if (!ctx) return;
+
+		// Clear canvas
+		ctx.clearRect(0, 0, width, height);
+
+		// Center point
+		const centerX = width / 2;
+		const centerY = height / 2;
+		const radius = Math.min(width, height) / 2 - padding;
+
+		// Draw compass circle
+		ctx.beginPath();
+		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+		ctx.strokeStyle = "black";
+		ctx.lineWidth = 2;
+		ctx.stroke();
+
+		// Draw degree numbers
+		ctx.font = "14px Arial";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+
+		// Draw degree numbers
+		for (let angle = 0; angle < 360; angle += 90) {
+			const radian = (angle * Math.PI) / 180;
+			const labelX = centerX + radius * 0.7 * Math.sin(radian);
+			const labelY = centerY - radius * 0.7 * Math.cos(radian);
+
+			// Draw degree number
+			ctx.fillStyle = "black";
+			ctx.fillText(angle.toString(), labelX, labelY);
+		}
+
+		// Fixed north arrow
+		drawArrow(ctx, centerX, centerY, radius, "red");
+
+		const rotationRadian = ((value % 360) * Math.PI) / 180;
+		drawArrow(ctx, centerX, centerY, radius, "orange", { rotation: rotationRadian });
+
+		return () => {
+			ctx.clearRect(0, 0, width, height);
+		};
+	}, [value, width, height, padding]);
+
+	return <canvas ref={canvasRef} width={width} height={height} />;
+};
+
+export default Compass;

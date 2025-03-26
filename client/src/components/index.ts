@@ -1,3 +1,3 @@
-export { default as AttitudeIndicator } from "./AttitudeIndicator";
-export { default as Altimeter } from "./Altimeter";
-export { default as Compass } from "./Compass";
+export * from "./ui";
+export * from "./instruments";
+export { default as Popup } from "./Popup/Popup.tsx";

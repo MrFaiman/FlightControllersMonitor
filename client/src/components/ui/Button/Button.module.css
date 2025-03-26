@@ -1,0 +1,27 @@
+.button {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: all 0.2s ease;
+	user-select: none;
+}
+
+.button:hover {
+	opacity: 0.9;
+}
+
+.button.active {
+	opacity: 0.7;
+}
+
+.default {
+	background-color: #e0e0e0;
+	color: #333;
+}
+
+.success {
+	background-color: #28a745;
+	color: white;
+}

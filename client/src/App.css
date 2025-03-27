@@ -1,4 +1,5 @@
-.container {
+.app {
+	width: 100vw;
 	height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -6,16 +7,9 @@
 	justify-content: center;
 }
 
-.instruments {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 2rem;
-}
-
 .buttons {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 1rem;
+	gap: 2rem;
 }

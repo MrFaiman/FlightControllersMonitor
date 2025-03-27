@@ -1,3 +1,3 @@
 export * from "./ui";
-export * from "./instruments";
+export { default as Instruments } from "./instruments/Instruments.tsx";
 export { default as Popup } from "./Popup/Popup.tsx";

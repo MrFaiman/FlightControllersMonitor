@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { Input, Button, Dialog } from "../";
 import { PopupProps } from "./Popup.types";
+import { useInstruments } from "../../hooks/InstrumentsContext";
 
-const Popup: React.FC<PopupProps> = ({ show, onClose, onSubmit }) => {
-	const [alt, setAlt] = useState(0);
-	const [his, setHis] = useState(0);
-	const [adi, setAdi] = useState(0);
+const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
+	const { state, setAltitude, setHsi, setAdi } = useInstruments();
+	if (!show) return null;
+
+	const [localState, setLocalState] = useState({
+		altitude: state.altitude,
+		hsi: state.hsi,
+		adi: state.adi,
+	});
 
 	const handleSubmit = () => {
-		onSubmit({ alt, his, adi });
+		setAltitude(localState.altitude);
+		setHsi(localState.hsi);
+		setAdi(localState.adi);
 		onClose();
 	};
 
@@ -19,27 +27,27 @@ const Popup: React.FC<PopupProps> = ({ show, onClose, onSubmit }) => {
 					type="number"
 					id="alt"
 					label="Altitude"
-					value={alt}
+					value={localState.altitude}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setAlt(Number(e.target.value))
+						setLocalState((prev) => ({ ...prev, altitude: Number(e.target.value) }))
 					}
 				/>
 				<Input
 					type="number"
 					id="his"
 					label="HIS"
-					value={his}
+					value={localState.hsi}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setHis(Number(e.target.value))
+						setLocalState((prev) => ({ ...prev, hsi: Number(e.target.value) }))
 					}
 				/>
 				<Input
 					type="number"
 					id="adi"
 					label="ADI"
-					value={adi}
+					value={localState.adi}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setAdi(Number(e.target.value))
+						setLocalState((prev) => ({ ...prev, adi: Number(e.target.value) }))
 					}
 				/>
 			</div>

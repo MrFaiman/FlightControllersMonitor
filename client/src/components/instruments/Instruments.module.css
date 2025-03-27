@@ -1,0 +1,11 @@
+.instruments {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	gap: 2rem;
+}
+
+.instruments > div {
+	min-width: 100px;
+}

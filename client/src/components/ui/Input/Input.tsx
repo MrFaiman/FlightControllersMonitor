@@ -1,5 +1,5 @@
 import React from "react";
-import { InputProps } from "./types";
+import { InputProps } from "./Input.types";
 import styles from "./Input.module.css";
 
 const Input: React.FC<InputProps> = ({ label, error, className, ...props }) => {

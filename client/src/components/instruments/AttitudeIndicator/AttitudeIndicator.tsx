@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { AttitudeIndicatorProps } from "./types";
 import styles from "./Attitudeindicator.module.css";
+import { Card } from "../../ui";
 
 const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 	value,
@@ -8,8 +9,15 @@ const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 	width = 300,
 	height = 300,
 }) => {
+	// ADI value between -100 and 100
+	const clampedValue = Math.max(-100, Math.min(100, value));
+
 	if (displayMode === "text") {
-		return <div>Text</div>;
+		return (
+			<Card title="ADI" align="center">
+				<span style={{ textAlign: "center" }}>{value}</span>
+			</Card>
+		);
 	}
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -26,9 +34,6 @@ const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 		// Center point
 		const centerX = width / 2;
 		const centerY = height / 2;
-
-		// ADI value between -100 and 100
-		const clampedValue = Math.max(-100, Math.min(100, value));
 
 		// Calculate the horizon line position
 		const horizonY = (Math.abs(clampedValue) / 100) * height;

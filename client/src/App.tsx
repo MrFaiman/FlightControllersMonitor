@@ -8,6 +8,7 @@ import { InstrumentsProvider } from "./hooks/InstrumentsContext";
 function App() {
 	const [showPopup, setShowPopup] = useState<boolean>(false);
 	const [displayMode, setDisplayMode] = useState<DisplayMode>("visual");
+
 	return (
 		<>
 			<div className="app">

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Input, Button, Dialog } from "../";
 import { PopupProps } from "./Popup.types";
 import { useInstruments } from "../../hooks/InstrumentsContext";
+import API from "../../api";
 
 const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
 	const { state, setAltitude, setHsi, setAdi } = useInstruments();
@@ -13,10 +14,18 @@ const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
 		adi: state.adi,
 	});
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		setAltitude(localState.altitude);
 		setHsi(localState.hsi);
 		setAdi(localState.adi);
+
+		if (localStorage.getItem("flightId")) {
+			await API.updateFlightData(localStorage.getItem("flightId")!, localState);
+		} else {
+			let res = await API.createFlightData(localState);
+			localStorage.setItem("flightId", res.data.id);
+		}
+
 		onClose();
 	};
 

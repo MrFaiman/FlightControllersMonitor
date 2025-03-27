@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { AttitudeIndicatorProps } from "./types";
+import { AttitudeIndicatorProps } from "./AttitudeIndicator.types";
 import styles from "./Attitudeindicator.module.css";
 import { Card } from "../../ui";
 

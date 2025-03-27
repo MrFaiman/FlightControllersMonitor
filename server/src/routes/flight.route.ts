@@ -10,7 +10,7 @@ router.post("/", async (req: Request, res: Response) => {
 		const validatedData = validateFlightData(altitude, hsi, adi);
 		const newFlightData = new FlightData(validatedData);
 		await newFlightData.save();
-		res.status(201).json({ data: newFlightData });
+		res.status(201).json({ data: validatedData });
 	} catch (error) {
 		res.status(500).json({ message: "Error saving flight data", error });
 	}

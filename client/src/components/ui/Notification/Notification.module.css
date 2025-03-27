@@ -1,0 +1,62 @@
+.notification {
+	position: fixed;
+	top: 1rem;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 1rem 2rem;
+	border-radius: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+	animation: slideDown 0.3s ease-out;
+	z-index: 1000;
+}
+
+.message {
+	font-size: 1rem;
+	color: white;
+}
+
+.closeButton {
+	background: none;
+	border: none;
+	color: white;
+	font-size: 1.5rem;
+	cursor: pointer;
+	padding: 0;
+	opacity: 0.8;
+	transition: opacity 0.2s;
+}
+
+.closeButton:hover {
+	opacity: 1;
+}
+
+.success {
+	background-color: #28a745;
+}
+
+.warning {
+	background-color: #ffc107;
+}
+
+.warning .message,
+.warning .closeButton {
+	color: #333;
+}
+
+.danger {
+	background-color: #dc3545;
+}
+
+@keyframes slideDown {
+	from {
+		transform: translate(-50%, -100%);
+		opacity: 0;
+	}
+	to {
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
+}

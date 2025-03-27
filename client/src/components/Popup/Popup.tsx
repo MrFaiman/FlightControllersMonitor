@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Input, Button, Dialog } from "../";
-import { PopupProps } from "./types";
+import { PopupProps } from "./Popup.types";
 
 const Popup: React.FC<PopupProps> = ({ show, onClose, onSubmit }) => {
 	const [alt, setAlt] = useState(0);

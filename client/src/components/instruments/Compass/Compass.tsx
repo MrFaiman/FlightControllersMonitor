@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { CompassProps, ArrowOptions } from "./types";
+import { CompassProps, ArrowOptions } from "./Compass.types";
 import { Card } from "../../ui";
 
 const drawArrow = (

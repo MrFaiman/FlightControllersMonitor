@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Dialog.module.css";
-import { DialogProps } from "./types";
+import { DialogProps } from "./Dialog.types";
 import { Button } from "../";
 
 const Dialog: React.FC<DialogProps> = ({ children, onClose, show }) => {

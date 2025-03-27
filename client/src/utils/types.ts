@@ -11,7 +11,7 @@ export interface BaseInstrumentProps extends CanvasProps {
 
 export interface FlightData {
 	altitude: number;
-	hsi: number;
+	his: number;
 	adi: number;
 }
 

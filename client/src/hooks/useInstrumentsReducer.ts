@@ -2,19 +2,19 @@ import { useReducer } from "react";
 
 export interface InstrumentsState {
 	adi: number;
-	hsi: number;
+	his: number;
 	altitude: number;
 }
 
 type InstrumentsAction =
 	| { type: "SET_ADI"; payload: number }
-	| { type: "SET_HSI"; payload: number }
+	| { type: "SET_HIS"; payload: number }
 	| { type: "SET_ALTITUDE"; payload: number }
 	| { type: "RESET" };
 
 const initialState: InstrumentsState = {
 	altitude: 1700,
-	hsi: 45,
+	his: 45,
 	adi: 50,
 };
 
@@ -28,10 +28,10 @@ const instrumentsReducer = (
 				...state,
 				adi: Math.max(-100, Math.min(100, action.payload)),
 			};
-		case "SET_HSI":
+		case "SET_HIS":
 			return {
 				...state,
-				hsi: ((action.payload % 360) + 360) % 360,
+				his: ((action.payload % 360) + 360) % 360,
 			};
 		case "SET_ALTITUDE":
 			return {
@@ -51,7 +51,7 @@ export function useInstrumentsReducer() {
 	return {
 		state,
 		setAdi: (value: number) => dispatch({ type: "SET_ADI", payload: value }),
-		setHsi: (value: number) => dispatch({ type: "SET_HSI", payload: value }),
+		setHis: (value: number) => dispatch({ type: "SET_HIS", payload: value }),
 		setAltitude: (value: number) => dispatch({ type: "SET_ALTITUDE", payload: value }),
 		reset: () => dispatch({ type: "RESET" }),
 	};

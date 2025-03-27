@@ -3,27 +3,27 @@ import { Input, Button, Dialog } from "@components/ui";
 import { PopupProps } from "./Popup.types";
 import { useInstruments } from "@hooks/InstrumentsContext";
 import API from "@utils/api";
-import { validateADI, validateAltitude, validateHSI, validateFlightData } from "@utils/flight.util";
+import { validateADI, validateAltitude, validateHIS, validateFlightData } from "@utils/flight.util";
 import { useNotification } from "@hooks/NotificationContext";
 
 const Popup: React.FC<PopupProps> = ({ show, close }) => {
-	const { state, setAltitude, setHsi, setAdi } = useInstruments();
+	const { state, setAltitude, setHis, setAdi } = useInstruments();
 	const { showNotification } = useNotification();
 	if (!show) return null;
 
 	const [localState, setLocalState] = useState({
 		altitude: state.altitude,
-		hsi: state.hsi,
+		his: state.his,
 		adi: state.adi,
 	});
 
 	const handleSubmit = () => {
-		if (!validateFlightData(localState.altitude, localState.hsi, localState.adi)) {
+		if (!validateFlightData(localState.altitude, localState.his, localState.adi)) {
 			return;
 		}
 
 		setAltitude(localState.altitude);
-		setHsi(localState.hsi);
+		setHis(localState.his);
 		setAdi(localState.adi);
 
 		showNotification("Flight data initialized", "success");
@@ -60,11 +60,11 @@ const Popup: React.FC<PopupProps> = ({ show, close }) => {
 					type="number"
 					id="his"
 					label="HIS"
-					value={localState.hsi}
+					value={localState.his}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setLocalState((prev) => ({ ...prev, hsi: Number(e.target.value) }))
+						setLocalState((prev) => ({ ...prev, his: Number(e.target.value) }))
 					}
-					error={validateHSI(localState.hsi) ? "" : "HSI value range is 0 to 360"}
+					error={validateHIS(localState.his) ? "" : "HIS value range is 0 to 360"}
 				/>
 				<Input
 					type="number"

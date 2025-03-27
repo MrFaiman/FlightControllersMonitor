@@ -45,7 +45,7 @@ const Compass: React.FC<CompassProps> = ({
 }) => {
 	if (displayMode === "text") {
 		return (
-			<Card title="HSI" align="center">
+			<Card title="HIS" align="center">
 				<span style={{ textAlign: "center" }}>{value}</span>
 			</Card>
 		);

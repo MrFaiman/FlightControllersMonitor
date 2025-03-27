@@ -2,9 +2,9 @@
  * Validates flight instrument values to their valid ranges
  */
 
-export const validateHSI = (hsi: number): boolean => {
-	// HSI should be between 0 and 360 degrees
-	return hsi >= 0 && hsi <= 360;
+export const validateHIS = (his: number): boolean => {
+	// HIS should be between 0 and 360 degrees
+	return his >= 0 && his <= 360;
 };
 
 export const validateAltitude = (altitude: number): boolean => {
@@ -17,6 +17,6 @@ export const validateADI = (adi: number): boolean => {
 	return adi >= -100 && adi <= 100;
 };
 
-export const validateFlightData = (altitude: number, hsi: number, adi: number): boolean => {
-	return validateAltitude(altitude) && validateHSI(hsi) && validateADI(adi);
+export const validateFlightData = (altitude: number, his: number, adi: number): boolean => {
+	return validateAltitude(altitude) && validateHIS(his) && validateADI(adi);
 };

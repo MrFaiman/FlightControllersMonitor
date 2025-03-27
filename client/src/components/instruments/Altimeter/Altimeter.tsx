@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { AltimeterProps } from "./types";
+import { AltimeterProps } from "./Altimeter.types";
 import { Card } from "../../ui";
 
 const Altimeter: React.FC<AltimeterProps> = ({

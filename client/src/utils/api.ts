@@ -1,8 +1,8 @@
-import { FlightData, ApiResponse } from "@utils/types";
+import { InstrumentsState, ApiResponse } from "@utils/types";
 
 export const API_URL = "/api";
 
-export const createFlightData = async (flightData: FlightData): Promise<ApiResponse> => {
+export const createFlightData = async (flightData: InstrumentsState): Promise<ApiResponse> => {
 	const response = await fetch(`${API_URL}/flight`, {
 		method: "POST",
 		body: JSON.stringify(flightData),

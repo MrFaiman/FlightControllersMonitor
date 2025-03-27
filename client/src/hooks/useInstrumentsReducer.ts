@@ -1,10 +1,5 @@
+import { InstrumentsState } from "@utils/types";
 import { useReducer } from "react";
-
-export interface InstrumentsState {
-	adi: number;
-	his: number;
-	altitude: number;
-}
 
 type InstrumentsAction =
 	| { type: "SET_ADI"; payload: number }

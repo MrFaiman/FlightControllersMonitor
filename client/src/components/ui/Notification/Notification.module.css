@@ -34,11 +34,11 @@
 }
 
 .success {
-	background-color: #28a745;
+	background-color: var(--success-color);
 }
 
 .warning {
-	background-color: #ffc107;
+	background-color: var(--warning-color);
 }
 
 .warning .message,
@@ -47,7 +47,7 @@
 }
 
 .danger {
-	background-color: #dc3545;
+	background-color: var(--danger-color);
 }
 
 @keyframes slideDown {

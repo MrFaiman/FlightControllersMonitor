@@ -3,20 +3,20 @@ export interface CanvasProps {
 	height?: number;
 }
 
+export interface InstrumentsState {
+	adi: number;
+	his: number;
+	altitude: number;
+}
+
 export type DisplayMode = "visual" | "text";
 
 export interface BaseInstrumentProps extends CanvasProps {
 	displayMode?: DisplayMode;
 }
 
-export interface FlightData {
-	altitude: number;
-	his: number;
-	adi: number;
-}
-
 export interface ApiResponse {
-	data: FlightData;
+	data: InstrumentsState;
 	message: string;
 	error: string;
 }

@@ -11,7 +11,7 @@ This project consists of two main parts:
 ### Client (/client)
 React-based frontend application providing visual interfaces for:
 - Altimeter (0-3000 ft)
-- Heading/HSI Compass (0-360°)
+- Heading/HIS Compass (0-360°)
 - Attitude Direction Indicator (-100 to +100)
 
 [More details in client README](./client/README.md)

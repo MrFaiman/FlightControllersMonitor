@@ -6,7 +6,7 @@ A React-based web application for monitoring and controlling flight instruments.
 
 This application provides a visual interface for flight control instruments including:
 - Altimeter (0-3000 ft)
-- Compass/HSI (0-360°)
+- Compass/HIS (0-360°)
 - Attitude Direction Indicator (-100 to +100)
 
 ## Tech Stack
@@ -19,12 +19,15 @@ This application provides a visual interface for flight control instruments incl
 ### Instruments
 - `Altimeter`: Displays current altitude
 - `Compass`: Shows heading/direction
-- `AttitudeIndicator`: Shows pitch and roll
+- `AttitudeIndicator`: Shows pitch
 
 ### UI Components
 - `Button`: Reusable button component with various sizes and variants
 - `Popup`: Control panel for adjusting instrument values
 - `Dialog`: Modal dialog component
+- `Input`: Reusable input component
+- `Card`: Container component for grouping related content with consistent styling
+- `Notification`: Toast notification component for displaying success/error messages
 
 ## State Management
 Uses React Context and Reducer pattern for managing instrument states.

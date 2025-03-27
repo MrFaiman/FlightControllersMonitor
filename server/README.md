@@ -22,14 +22,7 @@ All routes are prefixed with `/api`
 
 ### Flight Data Endpoints
 - POST `/api/flight`: Create new flight data
-  - Body: `{ altitude: number, hsi: number, adi: number }`
-- GET `/api/flight`: Get all flight data
-- GET `/api/flight/:id`: Get flight data by ID
-- PUT `/api/flight/:id`: Update flight data
-  - Body: `{ altitude: number, hsi: number, adi: number }`
-- DELETE `/api/flight/:id`: Delete flight data
-
-
+  - Body: `{ altitude: number, his: number, adi: number }`
 
 ## Environment Variables
 Required environment variables (see `.env.example`):

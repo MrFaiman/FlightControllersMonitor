@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import { AltimeterProps } from "./Altimeter.types";
-import { Card } from "../../ui";
+import { AltimeterProps, MAX_ALTITUDE, MIN_ALTITUDE } from "./Altimeter.types";
+import { Card } from "@components/ui";
 
 const Altimeter: React.FC<AltimeterProps> = ({
 	value,
@@ -8,8 +8,8 @@ const Altimeter: React.FC<AltimeterProps> = ({
 	width = 100,
 	height = 300,
 }) => {
-	// Altitude value between 0 and 3000
-	const clampedValue = Math.max(0, Math.min(3000, value));
+	// Altitude value between 0 and MAX_ALTITUDE
+	const clampedValue = Math.max(MIN_ALTITUDE, Math.min(MAX_ALTITUDE, value));
 
 	if (displayMode === "text") {
 		return (
@@ -34,23 +34,18 @@ const Altimeter: React.FC<AltimeterProps> = ({
 		// Clear canvas
 		ctx.clearRect(0, 0, width, height);
 
-		// Draw background
-		ctx.fillStyle = "white";
-		ctx.fillRect(0, 0, width, height);
-
 		// Draw border
 		ctx.strokeStyle = "black";
 		ctx.lineWidth = 2;
 		ctx.strokeRect(0, 0, width, height);
 
-		// Altitude scale
-		ctx.fillStyle = "black";
-		ctx.font = "12px Arial";
+		// Altitude text
+		ctx.font = "14px sans-serif";
 		ctx.textAlign = "left";
 
 		// Draw altitude markers
-		for (let alt = 0; alt <= 3000; alt += 500) {
-			const y = height - textPadding - (alt / 3000) * (height - 2 * textPadding);
+		for (let alt = MIN_ALTITUDE; alt <= MAX_ALTITUDE; alt += 500) {
+			const y = height - textPadding - (alt / MAX_ALTITUDE) * (height - 2 * textPadding);
 
 			// Horizontal line
 			ctx.beginPath();
@@ -64,7 +59,8 @@ const Altimeter: React.FC<AltimeterProps> = ({
 		}
 
 		// Calculate position of current value
-		const valueY = height - textPadding - (clampedValue / 3000) * (height - 2 * textPadding);
+		const valueY =
+			height - textPadding - (clampedValue / MAX_ALTITUDE) * (height - 2 * textPadding);
 
 		// Draw blue arrow
 		ctx.beginPath();

@@ -1,10 +1,10 @@
 import "./App.css";
 import { useState } from "react";
-import { Button, Popup } from "./components";
-import { DisplayMode } from "./utils/types";
-import Instruments from "./components/instruments/Instruments";
-import { InstrumentsProvider } from "./hooks/InstrumentsContext";
-import { NotificationProvider } from "./hooks/NotificationContext";
+import { Button, Popup } from "@components/ui";
+import { DisplayMode } from "@utils/types";
+import Instruments from "@components/instruments/Instruments";
+import { InstrumentsProvider } from "@hooks/InstrumentsContext";
+import { NotificationProvider } from "@hooks/NotificationContext";
 
 function App() {
 	const [showPopup, setShowPopup] = useState<boolean>(false);

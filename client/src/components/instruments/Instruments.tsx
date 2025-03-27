@@ -1,27 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Altimeter from "./Altimeter/Altimeter";
 import Compass from "./Compass/Compass";
 import AttitudeIndicator from "./AttitudeIndicator/AttitudeIndicator";
 import styles from "./Instruments.module.css";
-import { useInstruments } from "../../hooks/InstrumentsContext";
-import API from "../../utils/api";
+import { useInstruments } from "@hooks/InstrumentsContext";
 
 interface InstrumentsProps {
 	displayMode?: "visual" | "text";
 }
 
 const Instruments: React.FC<InstrumentsProps> = ({ displayMode = "visual" }) => {
-	const { state, setAltitude, setHsi, setAdi } = useInstruments();
-
-	useEffect(() => {
-		if (localStorage.getItem("flightId")) {
-			API.getFlightData(localStorage.getItem("flightId")!).then((res) => {
-				setAltitude(res.data.altitude);
-				setHsi(res.data.hsi);
-				setAdi(res.data.adi);
-			});
-		}
-	}, []);
+	const { state } = useInstruments();
 
 	return (
 		<div className={styles.instruments}>

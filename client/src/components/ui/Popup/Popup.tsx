@@ -1,15 +1,10 @@
 import React, { useState } from "react";
-import { Input, Button, Dialog } from "../";
+import { Input, Button, Dialog } from "@components/ui";
 import { PopupProps } from "./Popup.types";
-import { useInstruments } from "../../hooks/InstrumentsContext";
-import API from "../../utils/api";
-import {
-	validateADI,
-	validateAltitude,
-	validateHSI,
-	validateFlightData,
-} from "../../utils/flight.util";
-import { useNotification } from "../../hooks/NotificationContext";
+import { useInstruments } from "@hooks/InstrumentsContext";
+import API from "@utils/api";
+import { validateADI, validateAltitude, validateHSI, validateFlightData } from "@utils/flight.util";
+import { useNotification } from "@hooks/NotificationContext";
 
 const Popup: React.FC<PopupProps> = ({ show, close }) => {
 	const { state, setAltitude, setHsi, setAdi } = useInstruments();

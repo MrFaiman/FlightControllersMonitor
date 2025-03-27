@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
-import { CompassProps, ArrowOptions } from "./Compass.types";
-import { Card } from "../../ui";
+import { CompassProps, ArrowOptions, MAX_HEADING, MIN_HEADING } from "./Compass.types";
+import { Card } from "@components/ui";
 
 const drawArrow = (
 	ctx: CanvasRenderingContext2D,
@@ -75,13 +75,13 @@ const Compass: React.FC<CompassProps> = ({
 		ctx.lineWidth = 2;
 		ctx.stroke();
 
-		// Draw degree numbers
-		ctx.font = "14px Arial";
+		// Compass text
+		ctx.font = "14px sans-serif";
 		ctx.textAlign = "center";
 		ctx.textBaseline = "middle";
 
 		// Draw degree numbers
-		for (let angle = 0; angle < 360; angle += 90) {
+		for (let angle = MIN_HEADING; angle <= MAX_HEADING; angle += 90) {
 			const radian = (angle * Math.PI) / 180;
 			const labelX = centerX + radius * 0.7 * Math.sin(radian);
 			const labelY = centerY - radius * 0.7 * Math.cos(radian);
@@ -94,7 +94,7 @@ const Compass: React.FC<CompassProps> = ({
 		// Fixed north arrow
 		drawArrow(ctx, centerX, centerY, radius, "red");
 
-		const rotationRadian = ((value % 360) * Math.PI) / 180;
+		const rotationRadian = ((value % MAX_HEADING) * Math.PI) / 180;
 		drawArrow(ctx, centerX, centerY, radius, "orange", { rotation: rotationRadian });
 
 		return () => {

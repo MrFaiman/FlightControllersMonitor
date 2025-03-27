@@ -1,4 +1,4 @@
-import { BaseInstrumentProps } from "../../../utils/types";
+import { BaseInstrumentProps } from "@utils/types";
 
 export interface CompassProps extends BaseInstrumentProps {
 	value: number; // Heading value in degrees (0-360)
@@ -11,3 +11,6 @@ export interface ArrowOptions {
 	arrowHeadSize?: number; // Size of the arrow head
 	lineWidth?: number; // Width of the arrow line
 }
+
+export const MAX_HEADING = 360;
+export const MIN_HEADING = 0;

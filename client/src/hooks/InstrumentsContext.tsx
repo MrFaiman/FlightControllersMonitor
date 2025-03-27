@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import { useInstrumentsReducer, InstrumentsState } from "./useInstrumentsReducer";
+import { useInstrumentsReducer, InstrumentsState } from "@hooks/useInstrumentsReducer";
 
 interface InstrumentsContextType {
 	state: InstrumentsState;

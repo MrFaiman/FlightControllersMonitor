@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
-import { AttitudeIndicatorProps } from "./AttitudeIndicator.types";
+import { AttitudeIndicatorProps, MAX_ADI, MIN_ADI } from "./AttitudeIndicator.types";
 import styles from "./Attitudeindicator.module.css";
-import { Card } from "../../ui";
+import { Card } from "@components/ui";
 
 const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 	value,
@@ -10,7 +10,7 @@ const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 	height = 300,
 }) => {
 	// ADI value between -100 and 100
-	const clampedValue = Math.max(-100, Math.min(100, value));
+	const clampedValue = Math.max(MIN_ADI, Math.min(MAX_ADI, value));
 
 	if (displayMode === "text") {
 		return (
@@ -80,7 +80,7 @@ const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 			ref={canvasRef}
 			width={width}
 			height={height}
-			className={styles.attitude__indicator}
+			className={styles.attitudeIndicator}
 		/>
 	);
 };

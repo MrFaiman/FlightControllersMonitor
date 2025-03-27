@@ -1,4 +1,4 @@
-import { FlightData, ApiResponse } from "./types";
+import { FlightData, ApiResponse } from "@utils/types";
 
 export const API_URL = "/api";
 

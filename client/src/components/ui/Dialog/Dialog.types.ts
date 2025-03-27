@@ -1,5 +1,5 @@
 export interface DialogProps {
 	children: React.ReactNode;
-	onClose: () => void;
+	close: () => void;
 	show: boolean;
 }

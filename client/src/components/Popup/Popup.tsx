@@ -3,8 +3,14 @@ import { Input, Button, Dialog } from "../";
 import { PopupProps } from "./Popup.types";
 import { useInstruments } from "../../hooks/InstrumentsContext";
 import API from "../../api";
+import {
+	validateADI,
+	validateAltitude,
+	validateHSI,
+	validateFlightData,
+} from "../../utils/flight.util";
 
-const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
+const Popup: React.FC<PopupProps> = ({ show, close }) => {
 	const { state, setAltitude, setHsi, setAdi } = useInstruments();
 	if (!show) return null;
 
@@ -15,22 +21,20 @@ const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
 	});
 
 	const handleSubmit = async () => {
+		if (!validateFlightData(localState.altitude, localState.hsi, localState.adi)) {
+			return;
+		}
+
 		setAltitude(localState.altitude);
 		setHsi(localState.hsi);
 		setAdi(localState.adi);
+		close();
 
-		if (localStorage.getItem("flightId")) {
-			await API.updateFlightData(localStorage.getItem("flightId")!, localState);
-		} else {
-			let res = await API.createFlightData(localState);
-			localStorage.setItem("flightId", res.data.id);
-		}
-
-		onClose();
+		await API.createFlightData(localState);
 	};
 
 	return (
-		<Dialog show={show} onClose={onClose}>
+		<Dialog show={show} close={close}>
 			<div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 				<Input
 					type="number"
@@ -39,6 +43,11 @@ const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
 					value={localState.altitude}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 						setLocalState((prev) => ({ ...prev, altitude: Number(e.target.value) }))
+					}
+					error={
+						validateAltitude(localState.altitude)
+							? ""
+							: "Altitude value range is 0 to 3000"
 					}
 				/>
 				<Input
@@ -49,6 +58,7 @@ const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 						setLocalState((prev) => ({ ...prev, hsi: Number(e.target.value) }))
 					}
+					error={validateHSI(localState.hsi) ? "" : "HSI value range is 0 to 360"}
 				/>
 				<Input
 					type="number"
@@ -58,6 +68,7 @@ const Popup: React.FC<PopupProps> = ({ show, onClose }) => {
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 						setLocalState((prev) => ({ ...prev, adi: Number(e.target.value) }))
 					}
+					error={validateADI(localState.adi) ? "" : "ADI value range is -100 to 100"}
 				/>
 			</div>
 			<br />

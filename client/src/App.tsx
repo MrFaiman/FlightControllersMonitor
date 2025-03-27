@@ -34,7 +34,7 @@ function App() {
 				<br />
 				<InstrumentsProvider>
 					<Instruments displayMode={displayMode} />
-					<Popup show={showPopup} onClose={() => setShowPopup(false)} />
+					<Popup show={showPopup} close={() => setShowPopup(false)} />
 				</InstrumentsProvider>
 			</div>
 		</>

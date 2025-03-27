@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IFlightData extends Document {
-	id: string;
 	altitude: number;
 	hsi: number;
 	adi: number;
@@ -9,7 +8,6 @@ export interface IFlightData extends Document {
 
 const FlightSchema: Schema = new Schema(
 	{
-		id: { type: String, required: true },
 		altitude: { type: Number, required: true },
 		hsi: { type: Number, required: true },
 		adi: { type: Number, required: true },

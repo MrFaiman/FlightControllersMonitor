@@ -6,8 +6,8 @@ const router = Router();
 // Save new flight data
 router.post("/", async (req: Request, res: Response) => {
 	try {
-		const { altitude, hsi, adi } = req.body;
-		const validatedData = validateFlightData(altitude, hsi, adi);
+		const { altitude, his, adi } = req.body;
+		const validatedData = validateFlightData(altitude, his, adi);
 		const newFlightData = new FlightData(validatedData);
 		await newFlightData.save();
 		res.status(201).json({ data: validatedData });

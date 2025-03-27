@@ -18,7 +18,7 @@ const Instruments: React.FC<InstrumentsProps> = ({ displayMode = "visual" }) => 
 				<Altimeter value={state.altitude} displayMode={displayMode} />
 			</div>
 			<div>
-				<Compass value={state.hsi} displayMode={displayMode} />
+				<Compass value={state.his} displayMode={displayMode} />
 			</div>
 			<div>
 				<AttitudeIndicator value={state.adi} displayMode={displayMode} />

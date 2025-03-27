@@ -4,7 +4,7 @@ import { useInstrumentsReducer, InstrumentsState } from "@hooks/useInstrumentsRe
 interface InstrumentsContextType {
 	state: InstrumentsState;
 	setAdi: (value: number) => void;
-	setHsi: (value: number) => void;
+	setHis: (value: number) => void;
 	setAltitude: (value: number) => void;
 	reset: () => void;
 }

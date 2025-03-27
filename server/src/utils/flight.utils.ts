@@ -2,9 +2,9 @@
  * Validates and clamps flight instrument values to their valid ranges
  */
 
-export const validateHSI = (hsi: number): number => {
-	// HSI should be between 0 and 360 degrees
-	return Math.max(0, Math.min(360, hsi));
+export const validateHIS = (his: number): number => {
+	// his should be between 0 and 360 degrees
+	return Math.max(0, Math.min(360, his));
 };
 
 export const validateAltitude = (altitude: number): number => {
@@ -19,12 +19,12 @@ export const validateADI = (adi: number): number => {
 
 export const validateFlightData = (
 	altitude: number,
-	hsi: number,
+	his: number,
 	adi: number
 ) => {
 	return {
 		altitude: validateAltitude(altitude),
-		hsi: validateHSI(hsi),
+		his: validateHIS(his),
 		adi: validateADI(adi),
 	};
 };

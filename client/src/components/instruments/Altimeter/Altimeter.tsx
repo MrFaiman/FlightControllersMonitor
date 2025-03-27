@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { AltimeterProps } from "./types";
+import { Card } from "../../ui";
 
 const Altimeter: React.FC<AltimeterProps> = ({
 	value,
@@ -7,8 +8,15 @@ const Altimeter: React.FC<AltimeterProps> = ({
 	width = 100,
 	height = 300,
 }) => {
+	// Altitude value between 0 and 3000
+	const clampedValue = Math.max(0, Math.min(3000, value));
+
 	if (displayMode === "text") {
-		return <div>Text</div>;
+		return (
+			<Card title="Altitude" align="center">
+				<span style={{ textAlign: "center" }}>{clampedValue}</span>
+			</Card>
+		);
 	}
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,9 +33,6 @@ const Altimeter: React.FC<AltimeterProps> = ({
 
 		// Clear canvas
 		ctx.clearRect(0, 0, width, height);
-
-		// Altitude value between 0 and 3000
-		const clampedValue = Math.max(0, Math.min(3000, value));
 
 		// Draw background
 		ctx.fillStyle = "white";

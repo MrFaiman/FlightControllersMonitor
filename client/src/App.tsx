@@ -1,9 +1,10 @@
 import "./App.css";
 import { useState } from "react";
 import { Button, Popup } from "./components";
-import { DisplayMode } from "./shared/types";
+import { DisplayMode } from "./utils/types";
 import Instruments from "./components/instruments/Instruments";
 import { InstrumentsProvider } from "./hooks/InstrumentsContext";
+import { NotificationProvider } from "./hooks/NotificationContext";
 
 function App() {
 	const [showPopup, setShowPopup] = useState<boolean>(false);
@@ -33,8 +34,10 @@ function App() {
 				</div>
 				<br />
 				<InstrumentsProvider>
+					<NotificationProvider>
+						<Popup show={showPopup} close={() => setShowPopup(false)} />
+					</NotificationProvider>
 					<Instruments displayMode={displayMode} />
-					<Popup show={showPopup} close={() => setShowPopup(false)} />
 				</InstrumentsProvider>
 			</div>
 		</>

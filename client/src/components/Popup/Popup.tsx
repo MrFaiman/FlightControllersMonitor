@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { Input, Button, Dialog } from "../";
 import { PopupProps } from "./Popup.types";
 import { useInstruments } from "../../hooks/InstrumentsContext";
-import API from "../../api";
+import API from "../../utils/api";
 import {
 	validateADI,
 	validateAltitude,
 	validateHSI,
 	validateFlightData,
 } from "../../utils/flight.util";
+import { useNotification } from "../../hooks/NotificationContext";
 
 const Popup: React.FC<PopupProps> = ({ show, close }) => {
 	const { state, setAltitude, setHsi, setAdi } = useInstruments();
+	const { showNotification } = useNotification();
 	if (!show) return null;
 
 	const [localState, setLocalState] = useState({
@@ -20,7 +22,7 @@ const Popup: React.FC<PopupProps> = ({ show, close }) => {
 		adi: state.adi,
 	});
 
-	const handleSubmit = async () => {
+	const handleSubmit = () => {
 		if (!validateFlightData(localState.altitude, localState.hsi, localState.adi)) {
 			return;
 		}
@@ -28,9 +30,18 @@ const Popup: React.FC<PopupProps> = ({ show, close }) => {
 		setAltitude(localState.altitude);
 		setHsi(localState.hsi);
 		setAdi(localState.adi);
+
+		showNotification("Flight data initialized", "success");
 		close();
 
-		await API.createFlightData(localState);
+		API.createFlightData(localState)
+			.then(() => {
+				showNotification("Flight data sent successfully", "success");
+			})
+			.catch((err: Error) => {
+				showNotification("Error sending flight data", "danger");
+				console.error(err);
+			});
 	};
 
 	return (

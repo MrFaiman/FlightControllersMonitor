@@ -1,4 +1,4 @@
-import { BaseInstrumentProps } from "../../../shared/types";
+import { BaseInstrumentProps } from "../../../utils/types";
 
 export interface CompassProps extends BaseInstrumentProps {
 	value: number; // Heading value in degrees (0-360)

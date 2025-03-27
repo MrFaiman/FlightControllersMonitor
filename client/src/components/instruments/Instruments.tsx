@@ -4,7 +4,7 @@ import Compass from "./Compass/Compass";
 import AttitudeIndicator from "./AttitudeIndicator/AttitudeIndicator";
 import styles from "./Instruments.module.css";
 import { useInstruments } from "../../hooks/InstrumentsContext";
-import API from "../../api";
+import API from "../../utils/api";
 
 interface InstrumentsProps {
 	displayMode?: "visual" | "text";

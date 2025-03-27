@@ -3,16 +3,18 @@ import { useState } from "react";
 import { AttitudeIndicator, Altimeter, Compass, Button, Popup } from "./components";
 
 function App() {
-	const [showDialog, setShowDialog] = useState<boolean>(false);
+	const [showPopup, setShowPopup] = useState<boolean>(false);
 
 	return (
 		<>
 			<div className="container">
 				<h1 style={{ textAlign: "center" }}>Flight Monitor</h1>
 				<div className="buttons">
-					<Button>Text</Button>
-					<Button>Visual</Button>
-					<Button onClick={() => setShowDialog(true)}>+</Button>
+					<Button size="large">Text</Button>
+					<Button size="large">Visual</Button>
+					<Button size="large" onClick={() => setShowPopup(true)}>
+						+
+					</Button>
 				</div>
 				<br />
 				<div className="instruments">
@@ -21,7 +23,7 @@ function App() {
 					<AttitudeIndicator value={70} />
 				</div>
 			</div>
-			<Popup show={showDialog} onClose={() => setShowDialog(false)} onSubmit={() => {}} />
+			<Popup show={showPopup} onClose={() => setShowPopup(false)} onSubmit={() => {}} />
 		</>
 	);
 }

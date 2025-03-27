@@ -4,9 +4,14 @@ import styles from "./Attitudeindicator.module.css";
 
 const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 	value,
+	displayMode = "visual",
 	width = 300,
 	height = 300,
 }) => {
+	if (displayMode === "text") {
+		return <div>Text</div>;
+	}
+
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {

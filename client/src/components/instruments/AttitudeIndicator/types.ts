@@ -1,5 +1,5 @@
-import { CanvasProps } from "../../../shared/types";
+import { BaseInstrumentProps } from "../../../shared/types";
 
-export interface AttitudeIndicatorProps extends CanvasProps {
+export interface AttitudeIndicatorProps extends BaseInstrumentProps {
 	value: number;
 }

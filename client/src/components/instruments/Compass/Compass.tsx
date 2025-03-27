@@ -35,7 +35,17 @@ const drawArrow = (
 	ctx.restore();
 };
 
-const Compass: React.FC<CompassProps> = ({ value, width = 300, height = 300, padding = 0 }) => {
+const Compass: React.FC<CompassProps> = ({
+	value,
+	displayMode = "visual",
+	width = 300,
+	height = 300,
+	padding = 0,
+}) => {
+	if (displayMode === "text") {
+		return <div>Text</div>;
+	}
+
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {

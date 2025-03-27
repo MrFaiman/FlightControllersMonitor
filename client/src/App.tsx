@@ -8,7 +8,6 @@ function App() {
 	return (
 		<>
 			<div className="container">
-				<h1 style={{ textAlign: "center" }}>Flight Monitor</h1>
 				<div className="buttons">
 					<Button size="large">Text</Button>
 					<Button size="large">Visual</Button>

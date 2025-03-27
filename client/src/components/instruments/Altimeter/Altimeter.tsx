@@ -1,7 +1,16 @@
 import React, { useRef, useEffect } from "react";
 import { AltimeterProps } from "./types";
 
-const Altimeter: React.FC<AltimeterProps> = ({ value, width = 100, height = 300 }) => {
+const Altimeter: React.FC<AltimeterProps> = ({
+	value,
+	displayMode = "visual",
+	width = 100,
+	height = 300,
+}) => {
+	if (displayMode === "text") {
+		return <div>Text</div>;
+	}
+
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const textPadding = 30; // Padding for text
 	const markerLength = width * 0.3; // 30% of canvas width

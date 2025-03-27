@@ -1,6 +1,6 @@
-import { CanvasProps } from "../../../shared/types";
+import { BaseInstrumentProps } from "../../../shared/types";
 
-export interface CompassProps extends CanvasProps {
+export interface CompassProps extends BaseInstrumentProps {
 	value: number; // Heading value in degrees (0-360)
 	padding?: number;
 }

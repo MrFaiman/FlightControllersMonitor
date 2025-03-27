@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Card.module.css";
-import { CardProps } from "./types";
+import { CardProps } from "./Card.types";
 
 const Card: React.FC<CardProps> = ({ title, children, align = "left", ...props }) => {
 	return (

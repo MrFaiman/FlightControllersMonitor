@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { CompassProps, ArrowOptions } from "./types";
+import { Card } from "../../ui";
 
 const drawArrow = (
 	ctx: CanvasRenderingContext2D,
@@ -43,7 +44,11 @@ const Compass: React.FC<CompassProps> = ({
 	padding = 0,
 }) => {
 	if (displayMode === "text") {
-		return <div>Text</div>;
+		return (
+			<Card title="HSI" align="center">
+				<span style={{ textAlign: "center" }}>{value}</span>
+			</Card>
+		);
 	}
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);

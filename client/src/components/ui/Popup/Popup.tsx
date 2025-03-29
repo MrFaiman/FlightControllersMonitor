@@ -5,13 +5,14 @@ import { useInstruments } from "@hooks/InstrumentsContext";
 import API from "@utils/api";
 import { validateADI, validateAltitude, validateHIS, validateFlightData } from "@utils/flight.util";
 import { useNotification } from "@hooks/NotificationContext";
+import { InstrumentsState } from "@utils/types";
 
 const Popup: React.FC<PopupProps> = ({ show, close }) => {
 	const { state, setAltitude, setHis, setAdi } = useInstruments();
 	const { showNotification } = useNotification();
 	if (!show) return null;
 
-	const [localState, setLocalState] = useState({
+	const [localState, setLocalState] = useState<InstrumentsState>({
 		altitude: state.altitude,
 		his: state.his,
 		adi: state.adi,

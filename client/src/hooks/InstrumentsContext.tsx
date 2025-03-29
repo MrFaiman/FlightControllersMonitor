@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
-import { useInstrumentsReducer, InstrumentsState } from "@hooks/useInstrumentsReducer";
+import { useInstrumentsReducer } from "@hooks/useInstrumentsReducer";
+import { InstrumentsState } from "@utils/types";
 
 interface InstrumentsContextType {
 	state: InstrumentsState;
@@ -19,10 +20,10 @@ export const InstrumentsProvider = ({ children }: { children: React.ReactNode })
 	);
 };
 
-export function useInstruments() {
+export const useInstruments = () => {
 	const context = useContext(InstrumentsContext);
 	if (context === undefined) {
 		throw new Error("useInstruments must be used within an InstrumentsProvider");
 	}
 	return context;
-}
+};

@@ -40,7 +40,7 @@ const instrumentsReducer = (
 	}
 };
 
-export function useInstrumentsReducer() {
+export const useInstrumentsReducer = () => {
 	const [state, dispatch] = useReducer(instrumentsReducer, initialState);
 
 	return {
@@ -50,4 +50,4 @@ export function useInstrumentsReducer() {
 		setAltitude: (value: number) => dispatch({ type: "SET_ALTITUDE", payload: value }),
 		reset: () => dispatch({ type: "RESET" }),
 	};
-}
+};

@@ -6,7 +6,7 @@ import Instruments from "@components/instruments/Instruments";
 import { InstrumentsProvider } from "@hooks/InstrumentsContext";
 import { NotificationProvider } from "@hooks/NotificationContext";
 
-function App() {
+const App = () => {
 	const [showPopup, setShowPopup] = useState<boolean>(false);
 	const [displayMode, setDisplayMode] = useState<DisplayMode>("visual");
 
@@ -42,6 +42,6 @@ function App() {
 			</div>
 		</>
 	);
-}
+};
 
 export default App;

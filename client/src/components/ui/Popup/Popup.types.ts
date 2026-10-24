@@ -1,3 +1,3 @@
 import { DialogProps } from "@components/ui/Dialog/Dialog.types";
 
-export interface PopupProps extends Pick<DialogProps, "show" | "close"> {}
+export type PopupProps = Pick<DialogProps, "show" | "close">;

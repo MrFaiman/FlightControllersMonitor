@@ -1,59 +1,71 @@
 # Flight Controllers Monitor
 
-A full-stack web application for monitoring and controlling flight instruments in real-time.
+A full-stack instrument dashboard built with React 19, TypeScript, Vite 8, Express 5, and Mongoose 9.
 
-![Flight Controllers Monitor Preview](https://media.discordapp.net/attachments/996883728481652897/1354804015497482383/image.png?ex=67e69f10&is=67e54d90&hm=0f3a41e35c4e3cdfe399d1795d8a261fd4d3b0a1598317567f1675d87b00090e&=&format=webp&quality=lossless)
+- Altimeter: 0–3000 ft
+- Heading/HIS compass: 0–360°
+- Attitude Direction Indicator: −100 to +100
+- Visual and text displays, local instrument controls, and persistence to MongoDB
 
-## Project Structure
+This is a demonstration application, **not certified flight instrumentation**. It does not connect to aircraft hardware or stream telemetry.
 
-This project consists of two main parts:
+## Requirements
 
-### Client (/client)
-React-based frontend application providing visual interfaces for:
-- Altimeter (0-3000 ft)
-- Heading/HIS Compass (0-360°)
-- Attitude Direction Indicator (-100 to +100)
+- Node.js 24 LTS or newer (`nvm use` selects Node 24)
+- npm
+- MongoDB 8.x, locally or through a hosted connection string
 
-[More details in client README](./client/README.md)
+Dependencies use published, compatible stable releases; the project does not assume unreleased 2027 APIs. TypeScript stays on 6.0 while the ESLint TypeScript integration requires `<6.1`. Dependabot checks dependencies and CI actions weekly.
 
-### Server (/server)
-Express.js backend providing REST API endpoints for:
-- Creating and managing flight data
-- Real-time instrument state updates
-- Database with MongoDB
+## Quick start
 
-[More details in server README](./server/README.md)
+From the repository root:
 
-## Tech Stack
-- Frontend: React, TypeScript, Vite
-- Backend: Node.js, Express, TypeScript
-- Database: MongoDB
-- State Management: React Context + Reducer
-
-## Deployment
-
-To deploy the application:
-
-1. Build the client:
 ```bash
-cd client
+npm run setup
+cp server/.env.example server/.env
+```
+
+Set `MONGODB_URI` in `server/.env` and start MongoDB. Then run these in separate terminals:
+
+```bash
+npm run dev:server
+npm run dev:client
+```
+
+Open the URL printed by Vite (normally `http://localhost:5173`). Vite proxies `/api` to `http://localhost:5000`; change the proxy in `client/vite.config.ts` if you change the backend port.
+
+## Checks
+
+```bash
+npm run check
+```
+
+Runs client linting, client/API regression tests, and both production builds. API tests mock database writes and do not require MongoDB. CI repeats these checks on Node 24 and 26 and audits production dependencies.
+
+## Production
+
+```bash
 npm run build
-```
-
-2. Move built files to server:
-```bash
-mkdir -p ../server/public
-cp -r dist/* ../server/public/
-```
-
-3. Start the server:
-```bash
-cd ../server
 npm start
 ```
 
-The application will be available at:
-- Web Interface: `http://localhost:5000`
-- API Endpoints: `http://localhost:5000/api/*`
+The build compiles the server and copies the frontend into `server/public`. The server serves the UI and API together at `http://localhost:5000`. Startup waits for MongoDB; shutdown closes HTTP connections and disconnects from the database.
 
-This deployment method serves both the static frontend and API endpoints from a single Express server.
+Set `MONGODB_URI` and optionally `PORT` through your deployment environment or `server/.env`. Production runs compiled JavaScript, not a TypeScript development runner.
+
+This demo has no authentication. Keep it on a trusted network; add authentication, TLS, and request rate limits before exposing write endpoints to the internet. CORS is not an authorization mechanism.
+
+## Structure
+
+- [`client/`](./client/README.md): React UI, instrument canvases, context/reducer state, API client
+- [`server/`](./server/README.md): Express API, validation, MongoDB model, startup/shutdown
+- `scripts/`: portable production asset copying
+- `.github/`: CI and automated dependency updates
+
+## API
+
+- `GET /api`: API identification (not a database readiness probe)
+- `POST /api/flight`: persist `{ "altitude": 1700, "his": 45, "adi": 50 }`
+
+Send `Content-Type: application/json`. Values must be finite numbers within the instrument ranges. Successful writes return HTTP 201; invalid data returns 400. There is no read/update/delete API or live telemetry transport.

@@ -1,5 +1,5 @@
 import { Router, Request, Response } from "express";
-import flightRoutes from "./flight.route";
+import flightRoutes from "./flight.route.js";
 
 const router = Router();
 

@@ -7,10 +7,9 @@ import { validateADI, validateAltitude, validateHIS, validateFlightData } from "
 import { useNotification } from "@hooks/NotificationContext";
 import { InstrumentsState } from "@utils/types";
 
-const Popup: React.FC<PopupProps> = ({ show, close }) => {
+const PopupForm: React.FC<PopupProps> = ({ show, close }) => {
 	const { state, setAltitude, setHis, setAdi } = useInstruments();
 	const { showNotification } = useNotification();
-	if (!show) return null;
 
 	const [localState, setLocalState] = useState<InstrumentsState>({
 		altitude: state.altitude,
@@ -85,5 +84,8 @@ const Popup: React.FC<PopupProps> = ({ show, close }) => {
 		</Dialog>
 	);
 };
+
+const Popup: React.FC<PopupProps> = (props) =>
+	props.show ? <PopupForm {...props} /> : null;
 
 export default Popup;

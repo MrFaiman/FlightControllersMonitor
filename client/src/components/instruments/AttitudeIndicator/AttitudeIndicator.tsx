@@ -12,14 +12,6 @@ const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 	// ADI value between -100 and 100
 	const clampedValue = Math.max(MIN_ADI, Math.min(MAX_ADI, value));
 
-	if (displayMode === "text") {
-		return (
-			<Card title="ADI" align="center">
-				<span style={{ textAlign: "center" }}>{value}</span>
-			</Card>
-		);
-	}
-
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
@@ -73,7 +65,15 @@ const AttitudeIndicator: React.FC<AttitudeIndicatorProps> = ({
 		return () => {
 			ctx.clearRect(0, 0, width, height);
 		};
-	}, [value, width, height]);
+	}, [clampedValue, width, height, displayMode]);
+
+	if (displayMode === "text") {
+		return (
+			<Card title="ADI" align="center">
+				<span style={{ textAlign: "center" }}>{clampedValue}</span>
+			</Card>
+		);
+	}
 
 	return (
 		<canvas

@@ -11,14 +11,6 @@ const Altimeter: React.FC<AltimeterProps> = ({
 	// Altitude value between 0 and MAX_ALTITUDE
 	const clampedValue = Math.max(MIN_ALTITUDE, Math.min(MAX_ALTITUDE, value));
 
-	if (displayMode === "text") {
-		return (
-			<Card title="Altitude" align="center">
-				<span style={{ textAlign: "center" }}>{clampedValue}</span>
-			</Card>
-		);
-	}
-
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 	const textPadding = 30; // Padding for text
 	const markerLength = width * 0.3; // 30% of canvas width
@@ -76,7 +68,15 @@ const Altimeter: React.FC<AltimeterProps> = ({
 		return () => {
 			ctx.clearRect(0, 0, width, height);
 		};
-	}, [value, width, height]);
+	}, [clampedValue, width, height, arrowLength, markerLength, displayMode]);
+
+	if (displayMode === "text") {
+		return (
+			<Card title="Altitude" align="center">
+				<span style={{ textAlign: "center" }}>{clampedValue}</span>
+			</Card>
+		);
+	}
 
 	return <canvas ref={canvasRef} width={width} height={height} />;
 };

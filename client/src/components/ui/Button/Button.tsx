@@ -10,7 +10,7 @@ const Button: React.FC<ButtonProps> = ({
 	size = "medium",
 	...props
 }) => {
-	let classList = [styles.button];
+	const classList = [styles.button];
 	if (active) classList.push(styles.active);
 	classList.push(styles[variant]);
 	classList.push(styles[size]);

@@ -43,14 +43,6 @@ const Compass: React.FC<CompassProps> = ({
 	height = 300,
 	padding = 0,
 }) => {
-	if (displayMode === "text") {
-		return (
-			<Card title="HIS" align="center">
-				<span style={{ textAlign: "center" }}>{value}</span>
-			</Card>
-		);
-	}
-
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
@@ -100,7 +92,15 @@ const Compass: React.FC<CompassProps> = ({
 		return () => {
 			ctx.clearRect(0, 0, width, height);
 		};
-	}, [value, width, height, padding]);
+	}, [value, width, height, padding, displayMode]);
+
+	if (displayMode === "text") {
+		return (
+			<Card title="HIS" align="center">
+				<span style={{ textAlign: "center" }}>{value}</span>
+			</Card>
+		);
+	}
 
 	return <canvas ref={canvasRef} width={width} height={height} />;
 };

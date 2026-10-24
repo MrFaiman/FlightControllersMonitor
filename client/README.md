@@ -1,41 +1,30 @@
-# Flight Controller Monitor - Client
+# Flight Controllers Monitor — Client
 
-A React-based web application for monitoring and controlling flight instruments.
+React 19 + TypeScript + Vite 8, with CSS Modules and context/reducer state. Requires Node.js 24+.
 
-## Overview
+## Development
 
-This application provides a visual interface for flight control instruments including:
-- Altimeter (0-3000 ft)
-- Compass/HIS (0-360°)
-- Attitude Direction Indicator (-100 to +100)
-
-## Tech Stack
-- React + TypeScript
-- Vite for build tooling
-- CSS Modules for styling
-
-## Key Components
-
-### Instruments
-- `Altimeter`: Displays current altitude
-- `Compass`: Shows heading/direction
-- `AttitudeIndicator`: Shows pitch
-
-### UI Components
-- `Button`: Reusable button component with various sizes and variants
-- `Popup`: Control panel for adjusting instrument values
-- `Dialog`: Modal dialog component
-- `Input`: Reusable input component
-- `Card`: Container component for grouping related content with consistent styling
-- `Notification`: Toast notification component for displaying success/error messages
-
-## State Management
-Uses React Context and Reducer pattern for managing instrument states.
-
-## Getting Started
 ```bash
-git clone https://github.com/MrFaiman/FlightControllersMonitor.git FlightControllersMonitor
-cd FlightControllersMonitor/client
-npm install
-npm run start
+npm ci
+npm run dev
 ```
+
+Run the backend separately (see [`../server/README.md`](../server/README.md)). Vite proxies `/api` to `http://localhost:5000`. API requests remain same-origin in production.
+
+## Commands
+
+- `npm run dev`: development server, normally on port 5173
+- `npm run lint`: ESLint and React Hooks checks
+- `npm test`: UI and API-client regression tests
+- `npm run build`: TypeScript checks and production output in `dist`
+- `npm run preview`: preview `dist` locally; this does not start a backend or proxy API requests
+
+For a complete production deployment, run `npm run build` and `npm start` from the repository root.
+
+## Instruments
+
+- Altimeter: 0–3000 ft
+- Compass/HIS: 0–360°
+- Attitude Direction Indicator: −100 to +100
+
+Use Text/Visual to switch displays and `+` to open the data-entry dialog. Local instrument state uses React Context + Reducer. Sending data posts a JSON snapshot to `/api/flight`; failed HTTP responses produce error notifications rather than false success confirmations. This is a demonstration, not flight-certified instrumentation.

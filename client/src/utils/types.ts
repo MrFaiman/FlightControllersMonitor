@@ -16,7 +16,5 @@ export interface BaseInstrumentProps extends CanvasProps {
 }
 
 export interface ApiResponse {
-	data: InstrumentsState;
 	message: string;
-	error: string;
 }
